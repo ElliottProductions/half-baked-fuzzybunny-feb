@@ -20,6 +20,18 @@ export async function getFamilies() {
 
 }
 
+export async function getBunny(bunnyID) {
+    // fetch all families and their bunnies
+    const response = await client
+        .from('fuzzy_bunnies')
+        .select({ id: bunnyID });
+
+    //console.log(response.body);
+
+    return response.body;
+
+}
+
     
 
 export async function deleteBunny(bunny) {
@@ -33,6 +45,15 @@ export async function deleteBunny(bunny) {
 }
 
 export async function createBunny(bunnyName, familyID) {
+    // create a bunny using the bunny argument
+    console.log(bunnyName);
+    const variable = await client
+        .from('fuzzy_bunnies')
+        .insert({ name: bunnyName,
+            family_id: familyID });
+}
+
+export async function updateBunny(bunnyName, familyID) {
     // create a bunny using the bunny argument
     console.log(bunnyName);
     const variable = await client

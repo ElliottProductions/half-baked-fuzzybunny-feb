@@ -34,8 +34,9 @@ async function fetchAndDisplayFamilies() {
             bunnyEl.classList.add('bunny');
 
             bunnyEl.addEventListener('click', async ()=> {
-                deleteBunny(bunny);
-                bunnyEl.remove();
+                
+                window.location.href = (`../edit/?id=${family.id}`);
+                
             });
 
             familyBunnies.append(bunnyEl);
