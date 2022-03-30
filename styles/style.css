@@ -186,3 +186,8 @@ footer {
     padding-top: 40px;
 }
 
+.text-box {
+    background-color: aqua;
+    width: 40px;
+    margin: 100px;
+}

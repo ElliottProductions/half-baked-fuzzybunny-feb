@@ -20,8 +20,10 @@ async function displayFamilies() {
         const familyDiv = document.createElement('div');
         const familyName = document.createElement('h3');
         const familyBunnies = document.createElement('div');
+        familyBunnies.classList.add('family');//for testing purposes, delete
 
         familyDiv.classList.add('family');
+        
 
         familyName.textContent = `${family.name} household`;
 
@@ -32,7 +34,6 @@ async function displayFamilies() {
             
             bunnyEl.classList.add('bunny');
 
-            //add event listner that deletes bunny
             bunnyEl.addEventListener('click', async ()=> {
                 deleteBunny(bunny);
                 bunnyEl.remove();
