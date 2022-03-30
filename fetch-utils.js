@@ -14,8 +14,9 @@ export async function getFamilies() {
         .from('loving_families')
         .select('*, fuzzy_bunnies (*)');
 
-    //console.log(response.body);
-    return checkError(response.body);
+    console.log(response.body);
+
+    return response.body;
 
 }
 
@@ -23,14 +24,21 @@ export async function getFamilies() {
 
 export async function deleteBunny(id) {
     // delete a single bunny using the id argument
+    await client
+        .from('fuzzy_bunnies')
+        .delete()
+        .match({ id });
 
     return checkError(response);
 }
 
 export async function createBunny(bunny) {
     // create a bunny using the bunny argument
+    await client
+        .from('fuzzy_bunnies')
+        .insert({ name: bunny });
 
-    return checkError(response);
+    return checkError();
 }
 
 // MARTHA STEWART (PRE-MADE) FUNCTIONS

@@ -9,11 +9,12 @@ logoutButton.addEventListener('click', () => {
     logout();
 });
 
-function displayFamilies(families) {
-    
-
+async function displayFamilies() {
+    const families = await getFamilies();
+    console.log(families);
     // clear out the familiesEl
     familiesEl.textContent = '';
+
     for (let family of families) {
         // create three elements for each family, one for the whole family, one to hold the name, and one to hold the bunnies
         const familyDiv = document.createElement('div');
@@ -22,21 +23,26 @@ function displayFamilies(families) {
 
         familyDiv.classList.add('family');
 
-        familyName.textContent = `The ${family.name} Household`;
+        familyName.textContent = `${family.name} household`;
 
 
-        
         for (let bunny of family.fuzzy_bunnies) {
             const bunnyEl = document.createElement('div');
             bunnyEl.textContent = bunny.name;
+            
             bunnyEl.classList.add('bunny');
 
             //add event listner that deletes bunny
+            bunnyEl.addEventListener('click', async ()=> {
+                deleteBunny(bunny);
+                bunnyEl.remove();
+            });
 
             familyBunnies.append(bunnyEl);
         }
 
         familyDiv.append(familyName, familyBunnies);
+        familiesEl.append(familyDiv);
         // your HTML Element should look like this:
         // <div class="family">
         //    <h3>the Garcia family</h3>
@@ -59,7 +65,5 @@ function displayFamilies(families) {
 }
 
 window.addEventListener('load', async () => {
-    const families = await getFamilies();
-    
-    //displayFamilies(families);
+    await displayFamilies();
 });
