@@ -9,7 +9,7 @@ logoutButton.addEventListener('click', () => {
     logout();
 });
 
-async function displayFamilies() {
+async function fetchAndDisplayFamilies() {
     const families = await getFamilies();
     console.log(families);
     // clear out the familiesEl
@@ -20,7 +20,6 @@ async function displayFamilies() {
         const familyDiv = document.createElement('div');
         const familyName = document.createElement('h3');
         const familyBunnies = document.createElement('div');
-        familyBunnies.classList.add('family');//for testing purposes, delete
 
         familyDiv.classList.add('family');
         
@@ -66,5 +65,5 @@ async function displayFamilies() {
 }
 
 window.addEventListener('load', async () => {
-    await displayFamilies();
+    await fetchAndDisplayFamilies();
 });

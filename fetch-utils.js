@@ -22,14 +22,14 @@ export async function getFamilies() {
 
     
 
-export async function deleteBunny(id) {
+export async function deleteBunny(bunny) {
     // delete a single bunny using the id argument
     await client
         .from('fuzzy_bunnies')
         .delete()
-        .match({ id });
+        .match({ id: bunny.id });
 
-    return checkError();
+    
 }
 
 export async function createBunny(bunnyName, familyID) {
@@ -38,7 +38,7 @@ export async function createBunny(bunnyName, familyID) {
     const variable = await client
         .from('fuzzy_bunnies')
         .insert({ name: bunnyName,
-                family_id: familyID });
+            family_id: familyID });
 }
 
 // MARTHA STEWART (PRE-MADE) FUNCTIONS
