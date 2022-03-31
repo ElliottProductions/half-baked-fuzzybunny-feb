@@ -39,14 +39,16 @@ export async function deleteBunny(bunny) {
     await client
         .from('fuzzy_bunnies')
         .delete()
-        .match({ id: bunny.id });
+        .match({ id: bunny });
 
     
 }
 
+
+
 export async function createBunny(bunnyName, familyID) {
     // create a bunny using the bunny argument
-    console.log(bunnyName);
+
     await client
         .from('fuzzy_bunnies')
         .insert({ name: bunnyName,

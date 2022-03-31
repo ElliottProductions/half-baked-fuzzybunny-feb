@@ -3,15 +3,24 @@ import {
     checkAuth, 
     logout,
     updateBunny,
-    getBunny
+    getBunny,
+    deleteBunny
 } from '../fetch-utils.js';
 
 const form = document.querySelector('.bunny-form');
 const logoutButton = document.getElementById('logout');
 const familyDropDown = document.getElementById('family-id');
 const bunnyName = document.getElementById('bunny-name');
-
+const deleteBunnyButton = document.getElementById('delete-button');
+const sadBunny = document.getElementById('sadbunny');
 const params = new URLSearchParams(window.location.search);
+
+deleteBunnyButton.addEventListener('click', async ()=>{
+    await deleteBunny(params.get('id'));
+    window.location.href = (`../families`);
+
+});
+
 
 form.addEventListener('submit', async e => {
     // prevent default
@@ -55,4 +64,14 @@ checkAuth();
 
 logoutButton.addEventListener('click', () => {
     logout();
+});
+
+deleteBunnyButton.addEventListener('mouseover', async ()=>{
+    sadBunny.classList.remove('invisible');
+    
+});
+
+deleteBunnyButton.addEventListener('mouseout', async ()=>{
+    sadBunny.classList.add('invisible');
+    
 });
