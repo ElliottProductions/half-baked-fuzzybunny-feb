@@ -24,6 +24,7 @@ form.addEventListener('submit', async e => {
     await updateBunny(bunnyName, params.get('id'), familyDropDown.value);
     
     form.reset();
+    window.location.href = (`../families`);
 });
 
 window.addEventListener('load', async () => {
