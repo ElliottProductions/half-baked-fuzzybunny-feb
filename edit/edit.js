@@ -9,22 +9,29 @@ import {
 const form = document.querySelector('.bunny-form');
 const logoutButton = document.getElementById('logout');
 const familyDropDown = document.getElementById('family-id');
+const bunnyName = document.getElementById('bunny-name');
+
+const params = new URLSearchParams(window.location.search);
 
 form.addEventListener('submit', async e => {
     // prevent default
     e.preventDefault();
     // get the name and family id from the form
     const data = new FormData(form);
+
+    const bunnyName = data.get('bunny-name');
     // use createBunny to create a bunny with this name and family id
-    await updateBunny()//(data.get('bunny-name'), familyDropDown.value);
+    await updateBunny(bunnyName, params.get('id'), familyDropDown.value);
     
     form.reset();
 });
 
-window.addEventListener('load', async() => {
+window.addEventListener('load', async () => {
 
     //const bunny = await get
-    const currentBunny = await getBunny(params.get('id')
+    const currentBunny = await getBunny(params.get('id'));
+    console.log(currentBunny);
+    bunnyName.value = currentBunny.name;
     // let's dynamically fill in the families dropdown from supabase
     // grab the select HTML element from the DOM
     const dropDown = document.getElementById('family-id');
@@ -39,7 +46,7 @@ window.addEventListener('load', async() => {
         // const text = node.textContent;
         dropDown.append(familySelectEl);
     }
-    //dropDown.value = 
+    dropDown.value = currentBunny.family_id;
 });
 
 

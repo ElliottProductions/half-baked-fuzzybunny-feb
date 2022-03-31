@@ -14,7 +14,7 @@ async function fetchAndDisplayFamilies() {
     console.log(families);
     // clear out the familiesEl
     familiesEl.textContent = '';
-
+    
     for (let family of families) {
         // create three elements for each family, one for the whole family, one to hold the name, and one to hold the bunnies
         const familyDiv = document.createElement('div');
@@ -28,6 +28,7 @@ async function fetchAndDisplayFamilies() {
 
 
         for (let bunny of family.fuzzy_bunnies) {
+    
             const bunnyEl = document.createElement('div');
             bunnyEl.textContent = bunny.name;
             
@@ -35,7 +36,7 @@ async function fetchAndDisplayFamilies() {
 
             bunnyEl.addEventListener('click', async ()=> {
                 
-                window.location.href = (`../edit/?id=${family.id}`);
+                window.location.href = (`../edit/?id=${bunny.id}`);
                 
             });
 

@@ -9,6 +9,7 @@ const form = document.querySelector('.bunny-form');
 const logoutButton = document.getElementById('logout');
 const familyDropDown = document.getElementById('family-id');
 
+
 form.addEventListener('submit', async e => {
     // prevent default
     e.preventDefault();
