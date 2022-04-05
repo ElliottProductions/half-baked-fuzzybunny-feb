@@ -11,7 +11,7 @@ logoutButton.addEventListener('click', () => {
 
 async function fetchAndDisplayFamilies() {
     const families = await getFamilies();
-    console.log(families);
+
     // clear out the familiesEl
     familiesEl.textContent = '';
     

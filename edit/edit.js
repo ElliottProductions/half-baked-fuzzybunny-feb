@@ -40,14 +40,14 @@ window.addEventListener('load', async () => {
 
     //const bunny = await get
     const currentBunny = await getBunny(params.get('id'));
-    console.log(currentBunny);
+ 
     bunnyName.value = currentBunny.name;
     // let's dynamically fill in the families dropdown from supabase
     // grab the select HTML element from the DOM
     const dropDown = document.getElementById('family-id');
     // go get the families from supabase
     const allFamilies = await getFamilies();
-    console.log(allFamilies);
+
     // for each family
     for (let family of allFamilies){
         const familySelectEl = document.createElement('option');

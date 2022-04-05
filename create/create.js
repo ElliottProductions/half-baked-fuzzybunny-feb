@@ -28,7 +28,7 @@ window.addEventListener('load', async () => {
     const dropDown = document.getElementById('family-id');
     // go get the families from supabase
     const allFamilies = await getFamilies();
-    console.log(allFamilies);
+  
     // for each family
     for (let family of allFamilies){
         const familySelectEl = document.createElement('option');
