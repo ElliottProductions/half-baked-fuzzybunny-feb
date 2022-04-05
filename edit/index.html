@@ -22,11 +22,11 @@
     </header>    
     <button id="logout">Logout</button>
     <main class="create-main">
-        <h2>Add a new bunny</h2>
+        <h2>Edit this Bunny</h2>
         <form class="bunny-form">
             <label>
                 Bunny's name
-                <input name="bunny-name" />
+                <input name="bunny-name" id="bunny-name" />
             </label>
             <label>
                 Belongs to
@@ -34,13 +34,17 @@
 
                 </select>    
             </label>
-            <button>Submit</button>
+            <button>Edit</button>
+            
         </form>
+        <button id="delete-button">Delete</button>
+        <img src="../assets/sadbunny.PNG" class="invisible" id="sadbunny">
+        
     </main>
     <footer>
         <div class="copy gutter-right">&copy; 2021 Alchemy Code Lab</div>
     </footer>
-    <script type="module" src="./create.js"></script>
+    <script type="module" src="./edit.js"></script>
 </body>
 
 </html>

@@ -1,6 +1,6 @@
 // Create your own supabase database using the provided seeds.sql file
-const SUPABASE_URL = '';
-const SUPABASE_KEY = '';
+const SUPABASE_URL = 'https://gxwgjhfyrlwiqakdeamc.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzNjQxMTMxMiwiZXhwIjoxOTUxOTg3MzEyfQ.PHekiwfLxT73qQsLklp0QFEfNx9NlmkssJFDnlvNIcA';
 
 const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
@@ -10,20 +10,59 @@ export function getUser() {
 
 export async function getFamilies() {
     // fetch all families and their bunnies
+    const response = await client
+        .from('loving_families')
+        .select('*, fuzzy_bunnies (*)');
 
-    return checkError(response);
+    //console.log(response.body);
+
+    return response.body;
+
 }
 
-export async function deleteBunny(id) {
+export async function getBunny(bunnyID) {
+    // fetch all families and their bunnies
+    
+    const response = await client
+        .from('fuzzy_bunnies')
+        .select()
+        .match({ id: bunnyID });
+
+    return response.body[0];
+
+}
+
+    
+
+export async function deleteBunny(bunny) {
     // delete a single bunny using the id argument
+    await client
+        .from('fuzzy_bunnies')
+        .delete()
+        .match({ id: bunny });
 
-    return checkError(response);
+    
 }
 
-export async function createBunny(bunny) {
+
+
+export async function createBunny(bunnyName, familyID) {
     // create a bunny using the bunny argument
 
-    return checkError(response);
+    await client
+        .from('fuzzy_bunnies')
+        .insert({ name: bunnyName,
+            family_id: familyID });
+}
+
+export async function updateBunny(bunnyName, bunnyID, familyID) {
+    // create a bunny using the bunny argument
+    console.log(bunnyName);
+    await client
+        .from('fuzzy_bunnies')
+        .update({ name: bunnyName,
+            family_id: familyID })
+        .match({ id: bunnyID });
 }
 
 // MARTHA STEWART (PRE-MADE) FUNCTIONS
@@ -58,6 +97,4 @@ export async function logout() {
     return (window.location.href = '../');
 }
 
-function checkError({ data, error }) {
-    return error ? console.error(error) : data;
-}
+

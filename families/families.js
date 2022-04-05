@@ -1,4 +1,4 @@
-import { checkAuth, deleteBunny, getFamilies, logout } from '../fetch-utils.js';
+import { checkAuth, getFamilies, logout } from '../fetch-utils.js';
 
 checkAuth();
 
@@ -9,13 +9,42 @@ logoutButton.addEventListener('click', () => {
     logout();
 });
 
-function displayFamilies() {
-    // fetch families from supabase
+async function fetchAndDisplayFamilies() {
+    const families = await getFamilies();
 
     // clear out the familiesEl
-
+    familiesEl.textContent = '';
+    
     for (let family of families) {
         // create three elements for each family, one for the whole family, one to hold the name, and one to hold the bunnies
+        const familyDiv = document.createElement('div');
+        const familyName = document.createElement('h3');
+        const familyBunnies = document.createElement('div');
+
+        familyDiv.classList.add('family');
+        
+
+        familyName.textContent = `${family.name} household`;
+
+
+        for (let bunny of family.fuzzy_bunnies) {
+    
+            const bunnyEl = document.createElement('div');
+            bunnyEl.textContent = bunny.name;
+            
+            bunnyEl.classList.add('bunny');
+
+            bunnyEl.addEventListener('click', async ()=> {
+                
+                window.location.href = (`../edit/?id=${bunny.id}`);
+                
+            });
+
+            familyBunnies.append(bunnyEl);
+        }
+
+        familyDiv.append(familyName, familyBunnies);
+        familiesEl.append(familyDiv);
         // your HTML Element should look like this:
         // <div class="family">
         //    <h3>the Garcia family</h3>
@@ -38,7 +67,5 @@ function displayFamilies() {
 }
 
 window.addEventListener('load', async () => {
-    const families = await getFamilies();
-
-    displayFamilies(families);
+    await fetchAndDisplayFamilies();
 });
